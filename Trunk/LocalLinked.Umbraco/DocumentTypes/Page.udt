@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DocumentType>
+  <Info>
+    <Name>Page</Name>
+    <Alias>Page</Alias>
+    <Icon>.sprTreeDoc</Icon>
+    <Thumbnail>folder.png</Thumbnail>
+    <Description></Description>
+    <AllowedTemplates />
+    <DefaultTemplate></DefaultTemplate>
+  </Info>
+  <Structure />
+  <GenericProperties>
+    <GenericProperty>
+      <Name>Title</Name>
+      <Alias>title</Alias>
+      <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+      <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+      <Tab>Content</Tab>
+      <Mandatory>False</Mandatory>
+      <Validation></Validation>
+      <Description><![CDATA[]]></Description>
+    </GenericProperty>
+    <GenericProperty>
+      <Name>Body</Name>
+      <Alias>body</Alias>
+      <Type>5e9b75ae-face-41c8-b47e-5f4b0fd82f83</Type>
+      <Definition>ca90c950-0aff-4e72-b976-a30b1ac57dad</Definition>
+      <Tab>Content</Tab>
+      <Mandatory>False</Mandatory>
+      <Validation></Validation>
+      <Description><![CDATA[]]></Description>
+    </GenericProperty>
+    <GenericProperty>
+      <Name>Keywords</Name>
+      <Alias>keywords</Alias>
+      <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+      <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+      <Tab>Meta</Tab>
+      <Mandatory>False</Mandatory>
+      <Validation></Validation>
+      <Description><![CDATA[]]></Description>
+    </GenericProperty>
+    <GenericProperty>
+      <Name>Description</Name>
+      <Alias>description</Alias>
+      <Type>ec15c1e5-9d90-422a-aa52-4f7622c63bea</Type>
+      <Definition>0cc0eba1-9960-42c9-bf9b-60e150b429ae</Definition>
+      <Tab>Meta</Tab>
+      <Mandatory>False</Mandatory>
+      <Validation></Validation>
+      <Description><![CDATA[]]></Description>
+    </GenericProperty>
+  </GenericProperties>
+  <Tabs>
+    <Tab>
+      <Id>6</Id>
+      <Caption>Content</Caption>
+    </Tab>
+    <Tab>
+      <Id>7</Id>
+      <Caption>Meta</Caption>
+    </Tab>
+  </Tabs>
+</DocumentType>

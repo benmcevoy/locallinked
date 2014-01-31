@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/umbraco/masterpages/default.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+  <html>
+    <head>
+        <title><umbraco:Item ID="Item1" field="title" runat="server" /></title>
+        <meta name="description" content="<umbraco:Item ID="Item2" field="description" recursive="true" runat="server" />" />
+        <meta name="keywords" content="<umbraco:Item ID="Item3" field="keywords" recursive="true" runat="server" />" />
+        <script src="/scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+        <script src="/scripts/jquery.autocomplete.min.js" type="text/javascript"></script>
+        <link href="/scripts/jquery.autocomplete.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <%--web forms sucks arse - beware multiple form tags--%>
+        <form runat="server">
+            <asp:LoginStatus runat="server" />
+            <asp:LoginName runat="server" />
+            <umbraco:Macro ID="Macro1" FileLocation="/PrimaryNavigation.cshtml" runat="server" />
+            <asp:ContentPlaceHolder id="MainContent" runat="server"/>
+        </form>
+    </body>
+    </html>
+</asp:Content>

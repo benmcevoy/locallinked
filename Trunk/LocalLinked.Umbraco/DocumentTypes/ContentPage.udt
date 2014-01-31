@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DocumentType>
+  <Info>
+    <Name>ContentPage</Name>
+    <Alias>ContentPage</Alias>
+    <Icon>.sprTreeDoc4</Icon>
+    <Thumbnail>folder.png</Thumbnail>
+    <Description></Description>
+    <Master>Page</Master>
+    <AllowedTemplates>
+      <Template>ContentPage</Template>
+      <Template>Register</Template>
+      <Template>Login</Template>
+      <Template>Profile</Template>
+    </AllowedTemplates>
+    <DefaultTemplate>ContentPage</DefaultTemplate>
+  </Info>
+  <Structure>
+    <DocumentType>ContentPage</DocumentType>
+  </Structure>
+  <GenericProperties />
+  <Tabs />
+</DocumentType>

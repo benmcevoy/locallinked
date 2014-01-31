@@ -1,0 +1,12 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/masterpages/Site.master" AutoEventWireup="true" %>
+
+<%@ Register Src="~/usercontrols/Membership/Register.ascx" TagName="Register" TagPrefix="ll" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <h1><umbraco:Item Field="title" runat="server" /></h1>
+    <div>
+        <umbraco:Item Field="body" runat="server" />
+    </div>
+    
+    <ll:Register runat="server" />
+
+</asp:Content>

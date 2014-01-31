@@ -1,0 +1,110 @@
+﻿<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="/scripts/highcharts.js"></script>
+<script type="text/javascript" src="/scripts/locallinked.js"></script>
+<h2>
+    Signups
+
+    check out criticism http://techcrunch.com/2012/06/01/crittercism-series-a/
+</h2>
+<div>
+    chart showing cumluative and monthly for last six months
+    <div id="cumulative">
+    </div>
+</div>
+<div>
+    summary tile showing numbers total today this week this month this year
+    <ul id="statistics">
+    </ul>
+</div>
+<div>
+    <div style="float: left">
+        <h3>
+            profile specific pie chart of industry distribution</h3>
+        <div id="industry" style="min-width: 800px; height: 400px; margin: 20px">
+        </div>
+    </div>
+    <div style="float: left">
+        <h3>
+            profile specific pie chart of country could be map...</h3>
+        <div id="location" style="min-width: 800px; height: 400px; margin: 20px">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        locallinked.renderPieChart('/base/stats/getIndustry', 'Members By Industry', 'industry');
+        locallinked.renderPieChart('/base/stats/getLocation', 'Members By Location', 'location');
+
+        $.getJSON('/base/stats/getStatistics', function (data) {
+            // TODO yeah... some templating would be nice
+
+            $('#statistics').append('<li>All Time: ' + data.Total + '</li>');
+            $('#statistics').append('<li>This Year: ' + data.ThisMonth + '</li>');
+            $('#statistics').append('<li>This Month: ' + data.ThisYear + '</li>');
+            $('#statistics').append('<li>This Week: ' + data.ThisWeek + '</li>');
+            $('#statistics').append('<li>Today: ' + data.Today + '</li>');
+        });
+
+        var options = {
+            chart: {
+                renderTo: 'cumulative',
+                type: 'line'
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: 'Signups'
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%b %Y',
+                    year: '%Y'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Signups'
+                },
+                min: 0
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%b %Y', this.x) + ': ' + this.y + ' signups';
+                }
+            },
+
+            series: [{
+                name: 'Monthly Signups'
+            },
+            {
+                name: 'Cumulative Signups'
+            }]
+        };
+
+        $.getJSON('/base/stats/getCumulative', function (data) {
+            console.log(data);
+
+            var results = [];
+
+            $.each(data.FrequencyPerMonth, function (index, val) {
+                results.push([Date.UTC(val.Value.Year, val.Value.Month - 1, 1), val.Value.Frequency]);
+            });
+
+            options.series[0].data = results;
+
+            var results2 = [];
+
+            $.each(data.CumulativePerEndOfMonth, function (index, val) {
+                results2.push([Date.UTC(val.Value.Year, val.Value.Month - 1, 1), val.Value.Frequency]);
+            });
+
+            options.series[1].data = results2;
+
+            var cumulativeChart = new Highcharts.Chart(options);
+        });
+    });
+    
+</script>
