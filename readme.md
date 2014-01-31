@@ -1,4 +1,4 @@
-﻿LocalLinked.org
+﻿LocalLinked sample
 ==================
 
 ## Solution structure: ##
