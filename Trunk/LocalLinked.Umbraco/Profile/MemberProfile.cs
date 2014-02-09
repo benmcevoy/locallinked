@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security;
 using System.Web.Profile;
 using System.Web.Security;
 
@@ -13,7 +14,11 @@ namespace LocalLinked.Umbraco.Profile
 
         public static MemberProfile GetUserProfile()
         {
-            return Create(Membership.GetUser().UserName) as MemberProfile;
+            var member = Membership.GetUser();
+
+            if(member == null) throw new SecurityException("user not logged in");
+
+            return Create(member.UserName) as MemberProfile;
         }
 
         private string GetValue(string propertyName)

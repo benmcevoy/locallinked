@@ -1,6 +1,4 @@
-﻿using System;
-using System.Web;
-using System.Web.Security;
+﻿using System.Web;
 using LocalLinked.Umbraco.Profile;
 
 namespace LocalLinked.Umbraco.Services
@@ -35,7 +33,7 @@ namespace LocalLinked.Umbraco.Services
         /// <returns>MemberProfile or null if not found</returns>
         public MemberProfile GetMemberProfile(string userName)
         {
-            var user = Membership.GetUser(userName);
+            var user = System.Web.Security.Membership.GetUser(userName);
 
             if (user != null)
             {
@@ -48,33 +46,27 @@ namespace LocalLinked.Umbraco.Services
         /// <summary>
         /// Update current users MemberProfile or null if not found
         /// </summary>
-        /// <param name="profile"></param>
-        public void UpdateMemberProfile(string firstName, string lastName, string location, string industry, bool isIncludedInInvitationList)
+        public void UpdateMemberProfile(MemberProfile memberProfile)
         {
-            UpdateMemberProfile(_context.User.Identity.Name, firstName, lastName, location, industry, isIncludedInInvitationList);
+            UpdateMemberProfile(_context.User.Identity.Name, memberProfile);
         }
 
         /// <summary>
         /// Update this users MemberProfile
         /// </summary>
-        /// <remarks>
-        /// TODO: not sure I like this method? IT's DRY but it does not add much
-        /// </remarks>
-        /// <param name="userName"></param>
-        /// <param name="profile"></param>
-        public void UpdateMemberProfile(string userName, string firstName, string lastName, string location, string industry, bool isIncludedInInvitationList)
+        public void UpdateMemberProfile(string userName, MemberProfile memberProfile)
         {
-            var user = Membership.GetUser(userName);
+            var user = System.Web.Security.Membership.GetUser(userName);
 
             if (user != null)
             {
                 var currentProfile = MemberProfile.GetUserProfile(user.UserName);
 
-                currentProfile.FirstName = firstName;
-                currentProfile.LastName = lastName;
-                currentProfile.Location = location;
-                currentProfile.Industry = industry;
-                currentProfile.IsIncludedInInvitationList = isIncludedInInvitationList;
+                currentProfile.FirstName = memberProfile.FirstName;
+                currentProfile.LastName = memberProfile.LastName;
+                currentProfile.Location = memberProfile.Location;
+                currentProfile.Industry = memberProfile.Industry;
+                currentProfile.IsIncludedInInvitationList = memberProfile.IsIncludedInInvitationList;
 
                 currentProfile.Save();
             }

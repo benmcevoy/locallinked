@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Web;
 using LocalLinked.Umbraco.Profile;
 using LocalLinked.Umbraco.Services;
 
@@ -7,7 +6,7 @@ namespace LocalLinked.Umbraco.usercontrols.Membership
 {
     public partial class Profile : System.Web.UI.UserControl
     {
-        private MembershipService _membership = new MembershipService();
+        private readonly MembershipService _membershipService = new MembershipService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,7 +18,7 @@ namespace LocalLinked.Umbraco.usercontrols.Membership
 
         private void Bind()
         {
-            var profile = _membership.GetMemberProfile();
+            var profile = _membershipService.GetMemberProfile();
 
             if (profile != null)
             {
@@ -36,12 +35,14 @@ namespace LocalLinked.Umbraco.usercontrols.Membership
         {
             if (umbraco.library.IsLoggedOn())
             {
-                _membership.UpdateMemberProfile(
-                        FirstName.Text,
-                        LastName.Text,
-                        Location.Text,
-                        Industry.Text,
-                        IsIncludedInInvitationList.Checked);
+                _membershipService.UpdateMemberProfile(new MemberProfile
+                {
+                    FirstName = FirstName.Text,
+                    LastName = LastName.Text,
+                    Location = Location.Text,
+                    Industry = Industry.Text,
+                    IsIncludedInInvitationList = IsIncludedInInvitationList.Checked
+                });
             }
         }
     }

@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using System.Web.Profile;
 using LocalLinked.Umbraco.Profile;
-using Security = System.Web.Security;
 using LocalLinked.Umbraco.Services;
 
 namespace LocalLinked.Umbraco.usercontrols.Membership
 {
     public partial class Register : System.Web.UI.UserControl
     {
-        private MembershipService _membership = new MembershipService();
+        private readonly MembershipService _membership = new MembershipService();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,13 +25,15 @@ namespace LocalLinked.Umbraco.usercontrols.Membership
             var template = createUserWizard.CreateUserStep.ContentTemplateContainer;
 
             _membership.UpdateMemberProfile(createUserWizard.UserName, 
-                    ((TextBox)template.FindControl("FirstName")).Text,
-                    ((TextBox)template.FindControl("LastName")).Text,
-                    ((TextBox)template.FindControl("Location")).Text,
-                    ((TextBox)template.FindControl("Industry")).Text,
-                    ((CheckBox)template.FindControl("IsIncludedInInvitationList")).Checked
-                );
-            
+                new MemberProfile
+                    {
+                        FirstName = ((TextBox)template.FindControl("FirstName")).Text,
+                        LastName = ((TextBox)template.FindControl("LastName")).Text,
+                        Location = ((TextBox)template.FindControl("Location")).Text,
+                        Industry = ((TextBox)template.FindControl("Industry")).Text,
+                        IsIncludedInInvitationList = ((CheckBox)template.FindControl("IsIncludedInInvitationList")).Checked
+                    });
+
             Roles.AddUserToRole(createUserWizard.UserName, MemberGroups.SiteMembers);
 
             // log them in
